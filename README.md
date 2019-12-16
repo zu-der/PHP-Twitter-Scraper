@@ -85,7 +85,7 @@ You can view my profile via this link (https://www.github.com/EdinyangaOttoho)
 <img src="https://avatars3.githubusercontent.com/u/45470783?s=460&v=4" style="width:300px;height:330px">
 
 ## Victory Okhormhe
-Victory Okhormhe is a Front-End developer with over 2 years of experience. Stacks are HTML, CSS, BootStrap, Semantics UI, ES4, Elm, Python (Data Science ). Profile is accessible via: (https://www.github.com/victoryokhormhe).
+Victory Okhormhe is a Front-End developer with over 2 years of experience. Stacks are HTML, CSS, BootStrap, Semantic UI, ES4, Elm, Python (Data Science ). Profile is accessible via: (https://www.github.com/victoryokhormhe).
 
 <img src="https://avatars0.githubusercontent.com/u/41402418?s=460&v=4" style="width:300px;height:330px">
 
