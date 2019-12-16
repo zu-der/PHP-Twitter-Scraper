@@ -69,7 +69,7 @@ To use the code only, the following can be done;
 To use the UI, you can implement the following;
 ```php
 <?php
-  $tweets = new UITweets("");
+  $tweets = new UITweets("V_Z_Okhormhe");
   $tweets->getFirst();
   $tweets->getLast();
   $tweets->getAll();
