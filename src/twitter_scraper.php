@@ -69,4 +69,74 @@
             return $arr;
         }
     }
+    class Profile {
+        public $username;
+        public $followers;
+        public $photo;
+        public $name;
+        public $following;
+        public $likes;
+        function __construct($username) {
+            try {
+                $this->username = $username;
+                $url = "https://twitter.com/". $this->username;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,$url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                $result = curl_exec($ch);
+                preg_match_all('/\<span class="ProfileNav-value".+\>/', $result, $matches);
+                $info = array();
+                foreach ($matches[0] as $elem) {
+                    $match = str_replace('<span class="ProfileNav-value" data-count="','', $elem);
+                    $match = str_replace('" data-is-compact="false">', '', $match);
+                    array_push($info, strip_tags($match));
+                }
+                $cnt = 0;
+                $counter = 0;
+                foreach ($info as $i) {
+                    $cnt++;
+                    $counter++;
+                    if ($counter == 2) {
+                        $this->following = str_replace(',', '', $i);
+                    }
+                    if ($counter == 3) {
+                        $this->followers = str_replace(',', '', $i);
+                    }
+                    if ($counter == 4) {
+                        $this->likes = str_replace(',', '', $i);
+                    }
+                }
+                preg_match_all('/"https:\/\/pbs\.twimg\.com\/profile_images\/.+"/', $result, $profile);
+                $photo = preg_replace('/"/','',$profile[0][0]);
+                $this->photo = $photo;
+                preg_match_all('/ProfileHeaderCard-nameLink.+\>.+\<\/a\>/', $result, $user);
+                $userinfo = strip_tags($user[0][0]);
+                $userinfo = str_replace('Verified account', '', $userinfo);
+                $userinfo = str_replace('ProfileHeaderCard-nameLink u-textInheritColor js-nav">', '', $userinfo);
+                $this->name = $userinfo;
+                curl_close($ch);
+            }
+            catch (Exception $e) {
+                echo "Error! Unable to Process Request!";
+            }
+        }
+        public function getFollowing() {
+            return strval($this->following);
+        }
+        public function getFollowers() {
+            return strval($this->followers);
+        }
+        public function getLikes() {
+            return strval($this->likes);
+        }
+        public function getPhoto() {
+            return strval($this->photo);
+        }
+        public function getName() {
+            return strval($this->name);
+        }
+        public function getUsername() {
+            return strval($this->username);
+        }
+    }
 ?>
