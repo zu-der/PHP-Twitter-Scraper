@@ -79,7 +79,7 @@ The methods above are self-explanatory. Remember that for getAll, it returns all
 
 # Contributors
 ## Edinyanga Ottoho
-Edinyanga Ottoho is a Full-Stack software developer with over 3 years of experience. Stacks are HTML, CSS, Core PHP, Python/Django, EcmaScript 4/6, React Native/NodeJS A huge reason why the API is alive.
+Edinyanga Ottoho is a Full-Stack software developer with over 3 years of experience. Stacks are HTML, CSS, Core PHP, Python/Django, EcmaScript 4/6, React Native/NodeJS. A huge reason why the API is alive.
 You can view my profile via this link (https://www.github.com/EdinyangaOttoho)
 
 <img src="https://avatars3.githubusercontent.com/u/45470783?s=460&v=4" style="width:300px;height:330px">
