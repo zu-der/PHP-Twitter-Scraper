@@ -94,3 +94,6 @@ The following are required/recommended for effective functioning of this API. El
 - CURL PHP Extension Installed and Enabled.
 - PHP Version >= 7.2.0
 - A Poor server/internet Connectivity is a con
+
+# Issues/Fixes
+Contact us via +2348117093601 or +2348078920574 On WhatsApp or create an issue
