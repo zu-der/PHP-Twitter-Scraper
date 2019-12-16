@@ -21,14 +21,14 @@ It also can get the details of tweets, such as;
 - Retweets
 
 Simply, include the Script into your own project by;
-```
+```php
 <php
 include('twitter_scraper.php');
 ?>
 ```
 ## Samples
 ###### Profile (Code only)
-```
+```php
 <?php
   $profile = new Profile("EOttoho");
   $profile->getFollowers();
@@ -38,7 +38,7 @@ include('twitter_scraper.php');
 ?>
 ```
 ###### Profile (UI)
-```
+```php
 <?php
   $profile = new UIProfile("EOttoho");
   $profile->render();
@@ -47,7 +47,7 @@ include('twitter_scraper.php');
 
 ###### Tweets (Code Only)
 To use the code only, the following can be done;
-```
+```php
 <?php
   $tweets = new Tweets("V_Z_Okhormhe");
   $tweets->getFirst();
@@ -67,7 +67,7 @@ To use the code only, the following can be done;
 ```
 ###### Tweets (UI)
 To use the UI, you can implement the following;
-```
+```php
 <?php
   $tweets = new UITweets("");
   $tweets->getFirst();
