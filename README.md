@@ -82,9 +82,9 @@ The methods above are self-explanatory. Remember that for getAll, it returns all
 Edinyanga Ottoho is a Full-Stack software developer with over 3 years of experience. Stacks are HTML, CSS, Core PHP, Python/Django, EcmaScript 4/6, React Native/NodeJS A huge reason why the API is alive.
 You can view my profile via this link (https://www.github.com/EdinyangaOttoho)
 
-![Edinyanga Ottoho](https://avatars3.githubusercontent.com/u/45470783?s=460&v=4)
+img[alt=Edinyanga Ottoho]{ width:200px; height:250px } (https://avatars3.githubusercontent.com/u/45470783?s=460&v=4)
 
 ## Victory Okhormhe
 Victory Okhormhe is a Front-End developer with over 2 years of experience. Stacks are HTML, CSS, BootStrap, Semantic UI, Python/Data Science. Profile is accessible via: (https://www.github.com/victoryokhormhe).
 
-![Victory Okhormhe](https://avatars0.githubusercontent.com/u/41402418?s=460&v=4)
+img[alt=Victory Okhormhe]{ width:200px; height: 250px }(https://avatars0.githubusercontent.com/u/41402418?s=460&v=4)
