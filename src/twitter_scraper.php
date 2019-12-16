@@ -161,4 +161,26 @@
 		<?php
     	}
     }
+    class UIProfile {
+    	public $profile;
+    	public $likes;
+    	public $name;
+    	public $username;
+    	public $followers;
+    	public $following;
+    	public $photo;
+    	function __construct($username) {
+    		$this->profile = new Profile($username);
+    		$this->name = $profile->getName();
+    		$this->username = $profile->getUsername();
+    		$this->likes = $profile->getLikes();
+    		$this->followers = $profile->getFollowers();
+    		$this->photo = $profile->getPhoto();
+    		$this->following = $profile->getFollowing();
+    	}
+    	public function render() { ?>
+			
+		<?php
+    	}
+    }
 ?>
