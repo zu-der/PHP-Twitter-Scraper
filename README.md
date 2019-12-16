@@ -88,3 +88,9 @@ You can view my profile via this link (https://www.github.com/EdinyangaOttoho)
 Victory Okhormhe is a Front-End developer with over 2 years of experience. Stacks are HTML, CSS, BootStrap, Semantic UI, Python/Data Science. Profile is accessible via: (https://www.github.com/victoryokhormhe).
 
 <img src="https://avatars0.githubusercontent.com/u/41402418?s=460&v=4" style="width:300px;height:330px">
+
+# Requirements
+The following are required/recommended for effective functioning of this API. Else, some errors may come along;
+- CURL PHP Extension Installed and Enabled.
+- PHP Version >= 7.2.0
+- A good server/internet Connectivity is a con
