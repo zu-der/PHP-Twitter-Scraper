@@ -180,7 +180,7 @@
     	}
     	public function render() { ?>
 			
-		<?php
+	<?php
     	}
     }
 ?>
