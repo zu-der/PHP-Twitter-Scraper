@@ -139,4 +139,26 @@
             return strval($this->username);
         }
     }
+    class UITweets {
+    	public $profile;
+    	public $tweets;
+    	function __construct($username) {
+    		$this->profile = new Profile($username);
+    		$this->tweets = new Tweets($username);
+    	}
+    	function getAll() {
+    		foreach ($this->tweets->getAll() as $item) { ?>
+    			<blockquote class="twitter-tweet"><?php echo $item["text"]; ?>&mdash; <?php echo $this->profile->getName(); ?> (@<?php echo $this->profile->getUsername(); ?>) <a href="https://twitter.com/<?php echo $this->profile->getUsername(); ?>/status/<?php echo $item["id"]; ?>?ref_src=twsrc%5Etfw"></a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			<?php
+    		}
+    	}
+    	function getFirst() { ?>
+    		<blockquote class="twitter-tweet"><?php echo $this->tweets->getFirst()["text"]; ?>&mdash; <?php echo $this->profile->getName(); ?> (@<?php echo $this->profile->getUsername(); ?>) <a href="https://twitter.com/<?php echo $this->profile->getUsername(); ?>/status/<?php echo $this->tweets->getFirst()["id"]; ?>?ref_src=twsrc%5Etfw"></a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    	<?php
+    	}
+    	function getLast() { ?>
+    		<blockquote class="twitter-tweet"><?php echo $this->tweets->getLast()["text"]; ?>&mdash; <?php echo $this->profile->getName(); ?> (@<?php echo $this->profile->getUsername(); ?>) <a href="https://twitter.com/<?php echo $this->profile->getUsername(); ?>/status/<?php echo $this->tweets->getLast()["id"]; ?>?ref_src=twsrc%5Etfw"></a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<?php
+    	}
+    }
 ?>
