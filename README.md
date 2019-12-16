@@ -13,11 +13,13 @@ To use this API, just include the twitter_scraper.php file into your script and 
 - Followers
 - Following
 - Likes
+
 It also can get the details of tweets, such as;
 - Likes
 - Comments
 - Text
 - Retweets
+
 Simply, include the Script into your own project by;
 ```
 <php
@@ -76,3 +78,13 @@ To use the UI, you can implement the following;
 The methods above are self-explanatory. Remember that for getAll, it returns all the possible tweets (13).
 
 # Contributors
+## Edinyanga Ottoho
+Edinyanga Ottoho is a Full-Stack software developer with over 3 years of experience. Stacks are HTML, CSS, Core PHP, Python/Django, EcmaScript 4/6, React Native/NodeJS A huge reason why the API is alive.
+You can view my profile via this link (https://www.github.com/EdinyangaOttoho)
+
+![Edinyanga Ottoho](https://avatars3.githubusercontent.com/u/45470783?s=460&v=4)
+
+## Victory Okhormhe
+Victory Okhormhe is a Front-End developer with over 2 years of experience. Stacks are HTML, CSS, BootStrap, Semantic UI, Python/Data Science. Profile is accessible via: (https://www.github.com/victoryokhormhe).
+
+![Victory Okhormhe](https://avatars0.githubusercontent.com/u/41402418?s=460&v=4)
