@@ -93,4 +93,4 @@ Victory Okhormhe is a Front-End developer with over 2 years of experience. Stack
 The following are required/recommended for effective functioning of this API. Else, some errors may come along;
 - CURL PHP Extension Installed and Enabled.
 - PHP Version >= 7.2.0
-- A good server/internet Connectivity is a con
+- A Poor server/internet Connectivity is a con
