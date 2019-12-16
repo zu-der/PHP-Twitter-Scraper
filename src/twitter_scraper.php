@@ -179,7 +179,44 @@
     		$this->following = $profile->getFollowing();
     	}
     	public function render() { ?>
-			
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+			<style>
+				.modal {
+					width:300px;
+					padding:30px;
+					background-color:indigo;
+					border-radius:40px;
+					color:white;
+					font-weight:bold;
+					font-family:segoe ui;
+				}
+				.photo {
+					width:200px;
+					height:200px;
+					border-radius:50%;
+				}
+			</style>
+			<center>
+				<div class="modal">
+					<center>
+						<img src="<?php echo $this->photo; ?>" class="photo"/>
+						<br/>
+						<br/>
+						<h3><?php echo $this->name; ?></h3>
+						@<?php echo $this->username; ?>
+						<br/>
+						<br/>
+						<i class="fas fa-heart"></i> <?php echo $this->likes; ?>
+						<br/>
+						<br/>
+						<i class="fas fa-walking"></i> <?php echo $this->following; ?>
+						<br/>
+						<br/>
+						<i class="fas fa-user-friends"></i> <?php echo $this->followers; ?>
+					</center>
+				</div>
+			</center>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js"></script>
 	<?php
     	}
     }
