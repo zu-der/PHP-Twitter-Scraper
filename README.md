@@ -22,7 +22,7 @@ It also can get the details of tweets, such as;
 
 Simply, include the Script into your own project by;
 ```php
-<php
+<?php
 include('twitter_scraper.php');
 ?>
 ```
