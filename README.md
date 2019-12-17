@@ -79,10 +79,12 @@ To use the UI, you can implement the following;
 The methods above are self-explanatory. Remember that for getAll, it returns all the possible tweets (13).
 
 ###### Search
-The search class is used to fetch the most recent/trending 14 search results and display them as Embedded tweets on the user's page. To use this class, simply implement the following;
+The search class is used to fetch the most recent/trending 14 search results and display the results on the user's page. It accepts two arguments only. Search(string, category). **NOTE:** Photos not inclusive. To use this class, simply implement the following;
 ```php
 <?php
-  $search = new Search('Edinyanga Ottoho');
+  $search = new Search('Edinyanga Ottoho', 'tweets');
+  \\OR
+  $search = new Search('Edinyanga Ottoho', 'videos');
   #Returns the tweets results matching Edinyanga Ottoho.
 ?>
 ```
