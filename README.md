@@ -5,8 +5,9 @@ Use this tool to fetch the Twitter Front-end. You can get Tweet and Profile Deta
 For now, the API is limited to the most recent thirteen (13) tweets made by the given user account.
 
 ## Usage
-To use this API, just include the twitter_scraper.php file into your script and call necessary Classes and Methods. The API can get the profile of a user. The details include.
+To use this API, just include the twitter_scraper.php file into your script and call necessary Classes and Methods. Check examples too for further knowledge of usage.
 
+The API can get the profile of a user. The details include;
 - Profile Photo
 - Name
 - Username
@@ -76,6 +77,26 @@ To use the UI, you can implement the following;
 ?>
 ```
 The methods above are self-explanatory. Remember that for getAll, it returns all the possible tweets (13).
+
+###### Search
+The search class is used to fetch the most recent/trending 14 search results and display them as Embedded tweets on the user's page. To use this class, simply implement the following;
+```php
+<?php
+  $search = new Search('Edinyanga Ottoho');
+  #Returns the tweets results matching Edinyanga Ottoho.
+?>
+```
+###### Trends
+The trends class is used to fetch a maximum of ten (10) trends from a particular location. It uses one parameter which is the location (must be countries) to get trends from. Usage pattern;
+```php
+  $trends = new Trends('Nigeria');
+```
+It has three methods that **MUST** be called;
+```php
+   getAll(); //First All (An array)
+   getFirst(); //Fetch the First trend from the provided location
+   getLast(); //Fetches the Last (10th or less) trend from the given location
+```
 
 # Contributors
 ## Edinyanga Ottoho
