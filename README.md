@@ -87,7 +87,7 @@ The search class is used to fetch the most recent/trending 14 search results and
 ?>
 ```
 ###### Trends
-The trends class is used to fetch a maximum of ten (10) trends from a particular location. It uses one parameter which is the location (must be countries) to get trends from. Usage pattern;
+The trends class is used to fetch a maximum of ten (10) trends from a particular location. It uses one parameter which is the location (must be countries) to get trends from. **SOME** locations are restricted! Sorry if they do not yield good results or throw errors. Usage pattern;
 ```php
   $trends = new Trends('Nigeria');
 ```
