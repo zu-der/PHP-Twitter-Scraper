@@ -220,4 +220,59 @@
 	<?php
     	}
     }
+    class Search {
+    	public function __construct($string) {
+    		$string = urlencode($string);
+    		$ch = curl_init();
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=tweets");	
+    		$return = curl_exec($ch);
+    		curl_close($ch);
+    		preg_match_all('/data-tweet-id="[0-9]+"/', $return, $id);
+    		preg_match_all('/span.+username u-dir.+>/', $return, $username);
+    		$num = -1;
+    		foreach ($id[0] as $trend) {
+    			$num++;
+    			$tweetid = str_replace('data-tweet-id="', '', $trend);
+                $tweetid = str_replace('"', '', $tweetid);
+                $users = strip_tags(str_replace('@','',strip_tags(str_replace('&nbsp;', '', preg_replace('/span.+;/','',$username[0][$num])))));  ?>
+                <style>
+                	a {
+                		color:white;
+                		display:none
+                	}
+                </style>
+  				<blockquote class="twitter-tweet" data-lang="en"><a href="https://twitter.com/<?php echo $users; ?>/status/<?php echo $tweetid; ?>?ref_src=twsrc%5Etfw"></a></blockquote>
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <?php
+    		}
+    	}
+    }
+    class Trends {
+    	public $trending = array();
+    	public $count;
+    	function __construct() {
+    		$ch = curl_init();
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/nigeria/");
+    		$return = curl_exec($ch);
+    		preg_match_all('/trend-card__list.+>.+<\/ol>/', $return, $scrape);
+    		$final = preg_replace('/<span.+<\/span>/','', preg_replace('/<div.+>/','', str_replace('trend-card__list>', '', $scrape[0][0])));
+    		$splitter = explode("<li>", $final);
+    		$cnt = -1;
+    		for ($i = 1; $i < count($splitter); $i++) {
+    			array_push($this->trending, strip_tags($splitter[$i]));
+    		}
+    		$this->count = count($this->trending) - 1;
+    	}
+    	public function getFirst() {
+    		return $this->trending[0];
+    	}
+    	public function getLast() {
+    		return $this->trending[$this->count];
+    	}
+    	public function getAll() {
+    		return $this->trending;
+    	}
+    }
 ?>
