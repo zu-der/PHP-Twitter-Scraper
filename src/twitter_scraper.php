@@ -14,6 +14,9 @@
                 preg_match_all('/data-tweet-stat-count="[0-9]+"/', $result, $matches);
                 preg_match_all('/data-tweet-id="[0-9]+"/', $result, $id);
                 preg_match_all('/<p.+TweetTextSize.+<\/p>/', $result, $text);
+                if ($matches == null || $id == null || $text == null) {
+                	throw new Exception("error");
+                }
                 $tweetinfo = array();
                 $comments = "0";
                 $retweets = "0";
@@ -85,6 +88,9 @@
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 $result = curl_exec($ch);
                 preg_match_all('/\<span class="ProfileNav-value".+\>/', $result, $matches);
+                if ($matches == null) {
+                	throw new Exception("error");
+                }
                 $info = array();
                 foreach ($matches[0] as $elem) {
                     $match = str_replace('<span class="ProfileNav-value" data-count="','', $elem);
@@ -107,9 +113,15 @@
                     }
                 }
                 preg_match_all('/"https:\/\/pbs\.twimg\.com\/profile_images\/.+"/', $result, $profile);
+                if ($profile == null) {
+                	throw new Exception("error");
+                }
                 $photo = preg_replace('/"/','',$profile[0][0]);
                 $this->photo = $photo;
                 preg_match_all('/ProfileHeaderCard-nameLink.+\>.+\<\/a\>/', $result, $user);
+                if ($user == null) {
+                	throw new Exception("error");
+                }
                 $userinfo = strip_tags($user[0][0]);
                 $userinfo = str_replace('Verified account', '', $userinfo);
                 $userinfo = str_replace('ProfileHeaderCard-nameLink u-textInheritColor js-nav">', '', $userinfo);
@@ -171,15 +183,15 @@
     	public $photo;
     	function __construct($username) {
     		$this->profile = new Profile($username);
-    		$this->name = $profile->getName();
-    		$this->username = $profile->getUsername();
-    		$this->likes = $profile->getLikes();
-    		$this->followers = $profile->getFollowers();
-    		$this->photo = $profile->getPhoto();
-    		$this->following = $profile->getFollowing();
+    		$this->name = $this->profile->getName();
+    		$this->username = $this->profile->getUsername();
+    		$this->likes = $this->profile->getLikes();
+    		$this->followers = $this->profile->getFollowers();
+    		$this->photo = $this->profile->getPhoto();
+    		$this->following = $this->profile->getFollowing();
     	}
     	public function render() { ?>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 			<style>
 				.modal {
 					width:300px;
@@ -217,51 +229,113 @@
 				</div>
 			</center>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js"></script>
-	<?php
+		<?php
     	}
     }
     class Search {
-    	public function __construct($string) {
+    	public function __construct($string, $category) {
     		$string = urlencode($string);
     		$ch = curl_init();
-    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=tweets");	
-    		$return = curl_exec($ch);
-    		curl_close($ch);
-    		preg_match_all('/data-tweet-id="[0-9]+"/', $return, $id);
-    		preg_match_all('/span.+username u-dir.+>/', $return, $username);
-    		$num = -1;
-    		foreach ($id[0] as $trend) {
-    			$num++;
-    			$tweetid = str_replace('data-tweet-id="', '', $trend);
-                $tweetid = str_replace('"', '', $tweetid);
-                $users = strip_tags(str_replace('@','',strip_tags(str_replace('&nbsp;', '', preg_replace('/span.+;/','',$username[0][$num])))));  ?>
-                <style>
-                	a {
-                		color:white;
-                		display:none
-                	}
-                </style>
-  				<blockquote class="twitter-tweet" data-lang="en"><a href="https://twitter.com/<?php echo $users; ?>/status/<?php echo $tweetid; ?>?ref_src=twsrc%5Etfw"></a></blockquote>
-				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <?php
+    		try {
+    			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+	    		if ($category == "top") {
+		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=tweets");
+		    		$return = curl_exec($ch);
+		    		curl_close($ch);
+		    		preg_match_all('/data-tweet-id="[0-9]+"/', $return, $id);
+		    		preg_match_all('/span.+username u-dir.+>/', $return, $username);
+		    		if ($username == null || $id == null) {
+	                	throw new Exception("error");
+	                }
+		    		$num = -1;
+		    		foreach ($id[0] as $trend) {
+		    			$num++;
+		    			$tweetid = str_replace('data-tweet-id="', '', $trend);
+		                $tweetid = str_replace('"', '', $tweetid);
+		                $users = strip_tags(str_replace('@','',strip_tags(str_replace('&nbsp;', '', preg_replace('/span.+;/','',$username[0][$num])))));  ?>
+		                <style>
+		                	a {
+		                		color:white;
+		                		display:none
+		                	}
+		                </style>
+		  				<blockquote class="twitter-tweet" data-lang="en"><a href="https://twitter.com/<?php echo $users; ?>/status/<?php echo $tweetid; ?>?ref_src=twsrc%5Etfw"></a></blockquote>
+						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		            <?php
+		    		}
+	    		}	    		
+	    		if ($category == "people") {
+		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=users");
+		    		$return = curl_exec($ch);
+		    		curl_close($ch);
+		    		preg_match_all('/<span class="username.+(<b.+b>){1}.+<\/span>/', $return, $matches);
+		    		if ($matches == null) {
+	                	throw new Exception("error");
+	                }
+		    		$match = array_unique($matches[0]);
+		    		$cnt = 0;
+		    		foreach ($match as $user) {
+		    			$cnt++;
+		    			if ($cnt == 1) {
+		    				echo '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>';
+		    			}
+		    			if ($cnt == 2) { $cnt= 0; /*Do Nothing*/}
+		    		}
+	    		}
+	    		if ($category == "videos") {
+		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=videos");
+		    		$return = curl_exec($ch);
+		    		curl_close($ch);
+		    		preg_match_all('/data-tweet-id="[0-9]+"/', $return, $id);
+		    		preg_match_all('/span.+username u-dir.+>/', $return, $username);
+		    		if ($username == null || $id == null) {
+	                	throw new Exception("error");
+	                }
+		    		$num = -1;
+		    		foreach ($id[0] as $trend) {
+		    			$num++;
+		    			$tweetid = str_replace('data-tweet-id="', '', $trend);
+		                $tweetid = str_replace('"', '', $tweetid);
+		                $users = strip_tags(str_replace('@','',strip_tags(str_replace('&nbsp;', '', preg_replace('/span.+;/','',$username[0][$num])))));  ?>
+		                <style>
+		                	a {
+		                		color:white;
+		                		display:none
+		                	}
+		                </style>
+		  				<blockquote class="twitter-tweet" data-lang="en"><a href="https://twitter.com/<?php echo $users; ?>/status/<?php echo $tweetid; ?>?ref_src=twsrc%5Etfw"></a></blockquote>
+						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		            <?php
+		    		}
+	    		}
     		}
+    		catch (Exception $ex) {
+    			echo "Error! Unable to Process Request!";
+    		}	
     	}
     }
     class Trends {
     	public $trending = array();
     	public $count = 0;
     	function __construct($location) {
-    		$ch = curl_init();
-    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/". $location ."/");
-    		$return = curl_exec($ch);
-    		preg_match_all('/(<ol.+(<li.+<\/li>){10}.+<\/ol>){1}/', $return, $matches);
-    		$list = preg_replace('/,$/', '', strip_tags(str_replace('</a>', ',</a>', preg_replace('/<br.+<\/span>/', '', preg_replace('/<div.+trend-card.+>/','',$matches[0][0])))));
-    		$exploder = explode(',', $list);
-    		$this->count = count($exploder) - 1;
-    		foreach ($exploder as $item) {
-    			array_push($this->trending, strval($item));
+    		try {
+    			$ch = curl_init();
+	    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	    		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/". str_replace(' ', '-', strtolower($location)) ."/");
+	    		$return = curl_exec($ch);
+	    		preg_match_all('/(<ol.+(<li.+<\/li>){10}.+<\/ol>){1}/', $return, $matches);
+	    		if ($matches == null) {
+	                	throw new Exception("error");
+	            }
+	    		$list = preg_replace('/,$/', '', strip_tags(str_replace('</a>', ',</a>', preg_replace('/<br.+<\/span>/', '', preg_replace('/<div.+trend-card.+>/','',$matches[0][0])))));
+	    		$exploder = explode(',', $list);
+	    		$this->count = count($exploder) - 1;
+	    		foreach ($exploder as $item) {
+	    			array_push($this->trending, strval($item));
+	    		}
+    		}
+    		catch (Exception $ex) {
+    			echo "Error! Unable to Process Request!";
     		}
     	}
     	public function getFirst() {
@@ -274,4 +348,5 @@
     		return $this->trending;
     	}
     }
+    $trends = new Search("TiwaSavage", "videos");
 ?>
