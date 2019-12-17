@@ -97,6 +97,69 @@ It has three methods that **MUST** be called;
    getFirst(); //Fetch the First trend from the provided location
    getLast(); //Fetches the Last (10th or less) trend from the given location
 ```
+The following is a list of supported locations;
+- Algeria
+- Argentina
+- Australia
+- Austria
+- Bahrain
+- Belarus
+- Belgium
+- Brazil
+- Canada
+- Chile
+- Colombia
+- Denmark
+- Dominican Republic
+- Ecuador
+- Egypt
+- France
+- Germany
+- Ghana
+- Greece
+- Guatemala
+- India
+- Indonesia
+- Ireland
+- Israel
+- Italy
+- Japan
+- Jordan
+- Kenya
+- Korea
+- Kuwait
+- Latvia
+- Lebanon
+- Malaysia
+- Mexico
+- Netherlands
+- New Zealand
+- Nigeria
+- Norway
+- Oman
+- Pakistan
+- Panama
+- Peru
+- Philippines
+- Poland
+- Portugal
+- Puerto Rico
+- Qatar
+- Russia
+- Saudi Arabia
+- Singapore
+- South Africa
+- Spain
+- Sweden
+- Switzerland
+- Thailand
+- Turkey
+- Ukraine
+- United Arab Emirates
+- United Kingdom
+- United States
+- Venezuela
+- Vietnam
 
 # Contributors
 ## Edinyanga Ottoho
