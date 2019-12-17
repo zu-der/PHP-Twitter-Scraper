@@ -348,5 +348,4 @@
     		return $this->trending;
     	}
     }
-    $trends = new Search("TiwaSavage", "videos");
 ?>
