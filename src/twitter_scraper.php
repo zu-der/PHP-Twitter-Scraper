@@ -250,20 +250,19 @@
     }
     class Trends {
     	public $trending = array();
-    	public $count;
+    	public $count = 0;
     	function __construct($location) {
     		$ch = curl_init();
-    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/". $location ."/");
     		$return = curl_exec($ch);
-    		preg_match_all('/trend-card__list.+>.+<\/ol>/', $return, $scrape);
-    		$final = preg_replace('/<span.+<\/span>/','', preg_replace('/<div.+>/','', str_replace('trend-card__list>', '', $scrape[0][0])));
-    		$splitter = explode("<li>", $final);
-    		$cnt = -1;
-    		for ($i = 1; $i < count($splitter); $i++) {
-    			array_push($this->trending, strip_tags($splitter[$i]));
+    		preg_match_all('/(<ol.+(<li.+<\/li>){10}.+<\/ol>){1}/', $return, $matches);
+    		$list = preg_replace('/,$/', '', strip_tags(str_replace('</a>', ',</a>', preg_replace('/<br.+<\/span>/', '', preg_replace('/<div.+trend-card.+>/','',$matches[0][0])))));
+    		$exploder = explode(',', $list);
+    		$this->count = count($exploder) - 1;
+    		foreach ($exploder as $item) {
+    			array_push($this->trending, strval($item));
     		}
-    		$this->count = count($this->trending) - 1;
     	}
     	public function getFirst() {
     		return $this->trending[0];
