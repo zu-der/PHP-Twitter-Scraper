@@ -253,8 +253,8 @@
     	public $count;
     	function __construct($location) {
     		$ch = curl_init();
-    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/".$location."/");
+    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+    		curl_setopt($ch, CURLOPT_URL,"https://trends24.in/". $location ."/");
     		$return = curl_exec($ch);
     		preg_match_all('/trend-card__list.+>.+<\/ol>/', $return, $scrape);
     		$final = preg_replace('/<span.+<\/span>/','', preg_replace('/<div.+>/','', str_replace('trend-card__list>', '', $scrape[0][0])));
