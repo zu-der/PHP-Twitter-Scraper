@@ -233,6 +233,7 @@
     	}
     }
     class Search {
+        public $arrays = array();
     	public function __construct($string, $category) {
     		$string = urlencode($string);
     		$ch = curl_init();
@@ -273,15 +274,13 @@
 	                }
 		    		$match = array_unique($matches[0]);
 		    		$cnt = 0;
-		    		$arrays = array();
 		    		foreach ($match as $user) {
 		    			$cnt++;
 		    			if ($cnt == 1) {
-		    				array_push($arrays, '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>');
+		    				array_push($this->arrays, '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>');
 		    			}
 		    			if ($cnt == 2) { $cnt= 0; /*Do Nothing*/}
 		    		}
-		    		return $arrays;
 	    		}
 	    		if ($category == "videos") {
 		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=videos");
@@ -313,6 +312,9 @@
     		catch (Exception $ex) {
     			echo "Error! Unable to Process Request!";
     		}	
+    	}
+    	public function results() {
+    	    return $this->arrays;
     	}
     }
     class Trends {
