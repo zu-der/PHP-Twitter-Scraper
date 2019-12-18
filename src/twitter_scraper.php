@@ -237,7 +237,7 @@
     		$string = urlencode($string);
     		$ch = curl_init();
     		try {
-    			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+    			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	    		if ($category == "top") {
 		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=tweets");
 		    		$return = curl_exec($ch);
@@ -255,7 +255,6 @@
 		                $users = strip_tags(str_replace('@','',strip_tags(str_replace('&nbsp;', '', preg_replace('/span.+;/','',$username[0][$num])))));  ?>
 		                <style>
 		                	a {
-		                		color:white;
 		                		display:none
 		                	}
 		                </style>
@@ -274,13 +273,15 @@
 	                }
 		    		$match = array_unique($matches[0]);
 		    		$cnt = 0;
+		    		$arrays = array();
 		    		foreach ($match as $user) {
 		    			$cnt++;
 		    			if ($cnt == 1) {
-		    				echo '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>';
+		    				array_push($arrays, '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>');
 		    			}
 		    			if ($cnt == 2) { $cnt= 0; /*Do Nothing*/}
 		    		}
+		    		return $arrays;
 	    		}
 	    		if ($category == "videos") {
 		    		curl_setopt($ch, CURLOPT_URL,"https://twitter.com/search?q=".$string."&vertical=news&src=typed_query&f=videos");
