@@ -93,6 +93,15 @@ Only the following categories can be fetched in the search results;
 - Videos
 - People
 
+**NOTE:** If you use search, you should call a method results() which will return an array;
+As in;
+```php
+<?php
+  $search = new Search('Edinyanga Ottoho', 'people');
+  $search->results(); //Returns an array with results
+?>
+```
+
 ###### Trends
 The trends class is used to fetch a maximum of ten (10) trends from a particular location. It uses one parameter which is the location (must be countries) to get trends from. **SOME** locations are restricted! Sorry if they do not yield good results or throw errors. Usage pattern;
 ```php
