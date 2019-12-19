@@ -277,7 +277,7 @@
 		    		foreach ($match as $user) {
 		    			$cnt++;
 		    			if ($cnt == 1) {
-		    				array_push($this->arrays, '<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>');
+		    				array_push($this->arrays, strip_tags('<span class="people-item">'. strip_tags(str_replace('@', '', $user)). '</span><br/>'));
 		    			}
 		    			if ($cnt == 2) { $cnt= 0; /*Do Nothing*/}
 		    		}
